@@ -18,17 +18,6 @@ sysfunc.getContextMenuLabel = function()
 {
 	var res = "*rclick_default";
 	
-	switch (SystemManager.strContextMenuType) {
-		// MBContextMenuを継承したクラスを作ったりした後、
-		// ここに呼び出しラベルを増やす
-		case "normal":
-			res = "*rclick_normal";
-			break;
-		
-		default:
-			break;
-	}
-	
 	return res;
 } incontextof kag;
 
@@ -47,12 +36,11 @@ sysfunc.collideTestRect = function(obj1, obj2)
 } incontextof kag;
 
 
-// 標準画面サイズの定義と画面拡縮比率の計算
-sysvalue.RegularScreenSize = %[width : 800, height : 600];
+// 画面拡縮比率の計算
 sysfunc.getScreenScale = function(larger)
 {
-	var wr = kag.fore.base.width / sysvalue.RegularScreenSize.width;
-	var hr = kag.fore.base.height / sysvalue.RegularScreenSize.height;
+	var wr = kag.fore.base.width / MBGraphicPref.RegularScreenSize.width;
+	var hr = kag.fore.base.height / MBGraphicPref.RegularScreenSize.height;
 	
 	var scale = 1;
 	var lscale = 1;
