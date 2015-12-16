@@ -151,7 +151,7 @@ function KAGWindow_config()
 // 特に 毎回マクロ定義を 作品のはじめで行うような用途では、古いマクロの情報
 // が栞の読み込みによって新しいマクロの情報に上書きされてしまうことが開発の
 // 妨げになるため、false を指定した方がよいでしょう。
-;saveMacros = true;
+;saveMacros = false;
 
 
 
