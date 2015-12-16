@@ -306,7 +306,7 @@ function KAGWindow_config()
 // メニューによる栞の管理を行わない場合 ( ゲーム画面中で全部栞の管理などを
 // 行う場合など ) は、numBookMarks は必要な数に設定し、restoreMenu.visible と
 // storeMenu.visible を false に設定してください。
-;numBookMarks = 10;
+;numBookMarks = 60;
 
 
 // ◆ 栞に日付を併記するか
