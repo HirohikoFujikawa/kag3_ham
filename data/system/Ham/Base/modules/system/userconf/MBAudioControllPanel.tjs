@@ -390,7 +390,8 @@ class MBControllPanelAudioPane extends KAGLayer
 		// BGMフェーダを作る
 		
 		objAudioFader = new MBControllPanelAudioFader(window, this);
-		objAudioFader.left = Math.floor(window.bgm.volume / 1000 * objAudioFader.ks);
+		//objAudioFader.left = Math.floor(window.bgm.volume / 1000 * objAudioFader.ks);
+		objAudioFader.left = Math.floor(window.scflags.bgm.globalVolume / 1000 * objAudioFader.ks);
 		faderType = 1;
 		
 		changeState(true);
@@ -401,7 +402,8 @@ class MBControllPanelAudioPane extends KAGLayer
 		// SEフェーダを作る
 		
 		objAudioFader = new MBControllPanelAudioFader(window, this);
-		objAudioFader.left = Math.floor(window.se[0].currentVolume * objAudioFader.ks);
+		//objAudioFader.left = Math.floor(window.se[0].currentVolume * objAudioFader.ks);
+		objAudioFader.left = Math.floor(window.scflags.se[0].globalVolume / 1000 * objAudioFader.ks);
 		faderType = 2;
 		
 		changeState(true);
@@ -476,24 +478,18 @@ class MBControllPanelAudioPane extends KAGLayer
 	
 	function setBGMVolume(val)
 	{
-		// BGMのボリュームを設定
+		// BGMの大域ボリュームを設定
 		
-		window.bgm.fade(%[
-			"time"   => 10,
-			"volume" => val
-		]);
+		TAG.bgmopt(%[gvolume : val]);
 	}
 	
 	function setSEVolume(val)
 	{
-		// SE音量を設定する（全バッファの音量を変更する）
+		// SEの大域ボリュームを設定（すべてのバッファ）
 		
 		var i;
 		for (i=0; i<window.se.count; i++) {
-			window.se[i].fade(%[
-				"time" => 10,
-				"volume" => val
-			]);
+			TAG.seopt(%[buf : i, gvolume : val]);
 		}
 		
 		if (!objAudioFader.blDragging) {

@@ -61,18 +61,10 @@ if (sf.userconfig === void) {
 	sf.setCursorByKB = false;
 }
 
-// BGMボリューム設定読み込み
-kag.bgm.fade(%[
-	"time" => 10,
-	"volume" => sf.userconfig.bgmVolume
-]);
-
-// 効果音ボリューム設定読み込み
+// 念のためBGMとSEの大域ボリュームを設定
+TAG.bgmopt(%[gvolume : sf.userconfig.bgmVolume]);
 for (tf.i=0; tf.i<kag.se.count; tf.i++) {
-	kag.se[tf.i].fade(%[
-		"time" => 10,
-		"volume" => sf.userconfig.seVolume
-	]);
+	TAG.seopt(%[buf : tf.i, gvolume : sf.userconfig.seVolume]);
 }
 
 // プレイ時間関連
@@ -141,47 +133,6 @@ KAGLoadScript(MBBasePath + "Base/modules/system/history/MBHistoryScrollBar.tjs")
 KAGLoadScript(MBBasePath + "Base/modules/system/history/MBHistoryScrollPeg.tjs");
 
 KAGLoadScript(MBBasePath + "Base/StandBy.tjs");
-
-/*
-
-// 画像系
-createMBSystem(MBBasePath + "Base/modules/MBCharManager.tjs");
-createMBSystem(MBBasePath + "Base/modules/MBGraphicManager.tjs");
-createMBSystem(MBBasePath + "Base/modules/graphic/MBCartainController.tjs");
-createMBSystem(MBBasePath + "Base/modules/graphic/MBHumanSystem.tjs");
-createMBSystem(MBBasePath + "Base/modules/graphic/MBCinematController.tjs");
-
-// シーン管理系
-createMBSystem(MBBasePath + "Base/modules/MBSceneManager2.tjs");
-
-
-// 初期化
-createMBSystem("system_mb/init/withGraphicManager.tjs");
-createMBSystem("system_mb/init/withSceneManager.tjs");
-createMBSystem("system_mb/init/withMBCharManager.tjs");
-
-
-dm("システムの構築に %d msec かかりました。".sprintf(tmpSeconds));
-dm("構築を終了しています...");
-dm("");
-dm("MercuryBlueの初期化に %d msec かかりました。".sprintf(tmpSeconds + tmpSecondsAll));
-dm("");
-dm("<MBSystem> 『%s』を起動中...".sprintf(System.title));
-dm("");
-
-tmpSeconds    = 0;
-tmpSecondsAll = 0;
-
-// モジュールの初期化ファイルへ
-for (tf.i=0; tf.i<MBSystemPref.modules.count; tf.i++) {
-	if (Storages.isExistentStorage(MBSystemPref.modules[tf.i])) {
-		Scripts.execStorage(MBSystemPref.modules[tf.i]);
-	}
-	else {
-		throw new Exception("有効なモジュールが見つかりません。\nインストールをやり直してみてください。");
-	}
-}
-*/
 
 dm("HamExtentionの組み込みに%d msecかかりました。".sprintf(System.getTickCount() - parseStartTick));
 

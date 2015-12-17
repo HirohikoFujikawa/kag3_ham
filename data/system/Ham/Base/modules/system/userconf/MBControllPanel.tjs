@@ -373,11 +373,8 @@ class MBControllPanel extends MBComponentLayer
 		
 		// BGMミュート
 		objBGMMuteButton = new MBControllPanelAudioMuteButton(window, this);
-		//objBGMMuteButton.setImageSize(116, 19);
-		//objBGMMuteButton.setSizeToImageSize();
 		objBGMMuteButton.strBasicImageName    = sysfunc.getPathImage("userconf/audio_mute");
 		objBGMMuteButton.strSelectedImageName = sysfunc.getPathImage("userconf/audio_mute_checked");
-		//objBGMMuteButton.setPos(624, 116);
 		pos = getControllPanelPosition(617, 97);
 		objBGMMuteButton.setPos(pos.x, pos.y);
 		objBGMMuteButton.initState();
@@ -412,7 +409,6 @@ class MBControllPanel extends MBComponentLayer
 		
 		// SEミュート
 		objSEMuteButton = new MBControllPanelAudioMuteButton(window, this);
-		//objSEMuteButton.setImageSize(116, 19);
 		objSEMuteButton.setSizeToImageSize();
 		objSEMuteButton.strBasicImageName    = sysfunc.getPathImage('userconf/audio_mute');
 		objSEMuteButton.strSelectedImageName = sysfunc.getPathImage('userconf/audio_mute_checked');
@@ -820,9 +816,9 @@ class MBControllPanel extends MBComponentLayer
 	function saveUserConfig()
 	{
 		// 環境設定をシステム変数に記録する
-		sf.userconfig.bgmVolume       = window.bgm.volume / 1000;
+		sf.userconfig.bgmVolume       = window.scflags.bgm.globalVolume / 1000;
 		sf.userconfig.bgmMutedVolume  = intBGMMutedVolume;
-		sf.userconfig.seVolume        = window.se[0].currentVolume;
+		sf.userconfig.seVolume        = window.scflags.se[0].globalVolume / 1000;
 		sf.userconfig.seMutedVolume   = intSEMutedVolume;
 		sf.userconfig.charSpeed       = intCharSpeed;
 		sf.userconfig.setCursor       = blSetCursor;
@@ -847,7 +843,7 @@ class MBControllPanel extends MBComponentLayer
 		if (intBGMMutedVolume === void) {
 			// ミュート
 			
-			intBGMMutedVolume = window.bgm.volume / 1000;
+			intBGMMutedVolume = window.scflags.bgm.globalVolume / 1000;
 			
 			objBGMVolumePanel.setVolume(0);
 			objBGMVolumePanel.changeState(false);
@@ -870,7 +866,7 @@ class MBControllPanel extends MBComponentLayer
 		if (intSEMutedVolume === void) {
 			// ミュート
 			
-			intSEMutedVolume = window.se[0].currentVolume;
+			intSEMutedVolume = window.scflags.se[0].globalVolume / 1000;
 			
 			objSEVolumePanel.setVolume(0);
 			objSEVolumePanel.changeState(false);
